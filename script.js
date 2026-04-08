@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "hobby",
     "line_opt_in",
     "self_pr",
+    "profile_url",
     "ai_summary",
     "tags"
   ];
