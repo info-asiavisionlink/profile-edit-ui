@@ -2,104 +2,21 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>プロフィール編集フォーム</title>
-  <style>
-    :root {
-      --bg: #f6f8fc;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --accent: #3b82f6;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(135deg, #f8fafc, #eef2ff);
-      color: var(--text);
-      padding: 24px 16px;
-    }
-
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(17, 24, 39, 0.08);
-      padding: 24px;
-    }
-
-    h1 {
-      margin: 0 0 20px;
-      font-size: 1.45rem;
-    }
-
-    .section-title {
-      margin: 26px 0 12px;
-      font-size: 0.95rem;
-      color: var(--muted);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-
-    .field {
-      margin-bottom: 14px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 0.93rem;
-      font-weight: 600;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #fff;
-      color: var(--text);
-      padding: 11px 12px;
-      font-size: 0.98rem;
-      outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    textarea {
-      min-height: 96px;
-      resize: vertical;
-      line-height: 1.5;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>プロフィール編集</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="card">
+  <main class="container">
+    <section class="card">
       <h1>プロフィール編集</h1>
+      <p class="subtitle">内容を編集して保存してください。</p>
+      <p id="statusText" class="status"></p>
 
       <div class="section-title">基本情報</div>
       <div class="field">
         <label for="name">氏名</label>
-        <input id="name" type="text" />
+        <input id="name" type="text" autocomplete="name" />
       </div>
       <div class="field">
         <label for="company_name_input">会社名</label>
@@ -120,9 +37,15 @@
         <textarea id="ng_people"></textarea>
       </div>
       <div class="field">
-        <label for="hobby">あなたの得意なこと・提供できる価値</label>
+        <label for="hobby">得意なこと・提供できる価値</label>
         <textarea id="hobby"></textarea>
       </div>
+      <div class="field">
+        <label for="self_pr">自己PR</label>
+        <textarea id="self_pr"></textarea>
+      </div>
+
+      <div class="section-title">設定</div>
       <div class="field">
         <label for="line_opt_in">情報発信の希望</label>
         <select id="line_opt_in">
@@ -131,31 +54,21 @@
           <option value="希望しない">希望しない</option>
         </select>
       </div>
-    </div>
-  </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const params = new URLSearchParams(window.location.search);
+      <div class="section-title">AI情報</div>
+      <div class="field">
+        <label for="ai_summary">AIサマリー</label>
+        <textarea id="ai_summary" disabled></textarea>
+      </div>
+      <div class="field">
+        <label for="tags">タグ</label>
+        <input id="tags" type="text" />
+      </div>
 
-      const fieldKeys = [
-        "name",
-        "company_name_input",
-        "job_title",
-        "target_people",
-        "ng_people",
-        "hobby",
-        "line_opt_in"
-      ];
+      <button id="saveButton" type="button" class="save-button">保存する</button>
+    </section>
+  </main>
 
-      fieldKeys.forEach(function (key) {
-        const el = document.getElementById(key);
-        if (!el) return;
-
-        const value = params.get(key);
-        el.value = value === null ? "" : value;
-      });
-    });
-  </script>
+  <script src="./script.js"></script>
 </body>
 </html>
